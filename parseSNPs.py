@@ -86,39 +86,8 @@ if args.file2:
 else:
     nc_df = nc_df1
 
-
-# if not args.file2:
-#     CSV_IN = args.file
-#     nc_df1 = pd.read_csv(CSV_IN, index_col = 0)
-#     nc_df1.rename(columns=rename_cols, inplace=True)
-#     nc_df1 = nc_df1[nc_df1.columns.intersection(keep_cols)]
-#     nc_df = nc_df1
-# else:
-#     if not args.file3:
-#         CSV_IN2 = args.file1
-#         nc_df2 = pd.read_csv(CSV_IN2, index_col = 0)
-#         nc_df2.rename(columns=rename_cols, inplace=True)
-#         nc_df2 = nc_df1[nc_df1.columns.intersection(keep_cols)]
-#         nc_df = pd.concat([nc_df1, nc_df2], axis=0)
-#     else:
-#         CSV_IN2 = args.file1
-#         nc_df2 = pd.read_csv(CSV_IN2, index_col = 0)
-#         nc_df2.rename(columns=rename_cols, inplace=True)
-#         nc_df2 = nc_df1[nc_df1.columns.intersection(keep_cols)]
-#         CSV_IN3 = args.file2
-#         nc_df3 = pd.read_csv(CSV_IN3, index_col = 0)
-#         nc_df3.rename(columns=rename_cols, inplace=True)
-#         nc_df3 = nc_df1[nc_df1.columns.intersection(keep_cols)]
-#         nc_df = pd.concat([nc_df1, nc_df2, nc_df3], axis=0)
-
 # change snps, and indels to strings
 nc_df['substitutions'] = nc_df['substitutions'].str.strip('()').str.split(',')
-#nc_df['deletions'] = nc_df['deletions'].str.strip('()').str.split(',')
-#nc_df['insertions'] = nc_df['insertions'].str.strip('()').str.split(',')
-
-# #add samps as column
-# nc_df.index.name = 'sample'
-# nc_df.reset_index(inplace=True)
 
 # get snps into df
 snps_df = nc_df.copy()[["sample","substitutions","deletions","insertions"]]
@@ -162,9 +131,9 @@ snp_list_sorted.insert(0,'sample')
 final_df=concat_df.reindex(columns=snp_list_sorted)
 
 
-###############################
-## WRITE THAT BITCH OUT BRUH ##
-###############################
+###############
+## WRITE OUT ##
+###############
 
 NOW_STAMP = datetime.datetime.now().strftime("%Y%m%d")
 
